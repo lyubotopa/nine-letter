@@ -1,17 +1,28 @@
 package com.ioncannon;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        FileReader fileReader = new FileReader();
+        ArrayList<String> dictionary = fileReader.readRemoteFile("https://raw.githubusercontent.com/nikiiv/" +
+                "JavaCodingTestOne/master/scrabble-words.txt");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        long beforeSolving = System.currentTimeMillis();
+        BuildUpSolver solver = new BuildUpSolver();
+        ArrayList<String[]> solutions = solver.solve(dictionary, new ArrayList<>(Arrays.asList("A", "I")), 9);
+        long afterSolving = System.currentTimeMillis();
+
+        System.out.printf("Solving took %d milliseconds%n", afterSolving-beforeSolving);
+        System.out.println(solutions.size() + " solutions found");
+
+        for (String[] solution : solutions) {
+            System.out.println("\n");
+            for (int i=solution.length-1; i>=0; i--) {
+                System.out.println(solution[i]);
+            }
         }
     }
 }
