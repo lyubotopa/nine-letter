@@ -46,7 +46,7 @@ public class TopDownSolver {
             for (String[] solution : prevSolutions) {
                 findNextWord: {
                     String currentWord = solution[maxLetters - wordIndex - 1];
-                    String[] shortVersions = new String[currentWord.length() - 1];
+                    String[] shortVersions = new String[currentWord.length()];
                     for (int i = 0; i < shortVersions.length; i++) {
                         shortVersions[i] = currentWord.substring(0, i) + currentWord.substring(i + 1);
                     }
