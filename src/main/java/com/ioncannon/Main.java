@@ -11,7 +11,8 @@ public class Main {
                 "JavaCodingTestOne/master/scrabble-words.txt");
 
         long beforeSolving = System.currentTimeMillis();
-        BuildUpSolver solver = new BuildUpSolver();
+        TopDownSolver solver = new TopDownSolver();
+        //BuildUpSolver solver = new BuildUpSolver();
         ArrayList<String[]> solutions = solver.solve(dictionary, new ArrayList<>(Arrays.asList("A", "I")), 9);
         long afterSolving = System.currentTimeMillis();
 

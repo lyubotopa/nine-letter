@@ -1,15 +1,15 @@
 package com.ioncannon;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 
-public class BuildUpSolver {
+public class TopDownSolver {
 
     /**
-     * Solves the puzzle by building up words from single letter to the maximum length
-     * Finds all solutions, but takes hours
+     * Solves the puzzle by starting from the max length and searching for smaller words
      * @param dictionary - a list of all valid words
      * @param maxLetters - the maximum length of the words (9 in the original puzzle)
      * @param singleLetterWords - if the single letter words are not included in the dictionary, specify them here
@@ -36,44 +36,36 @@ public class BuildUpSolver {
 
         /* find solutions */
         ArrayList<String[]> solutions = new ArrayList<String[]>();
-        for (String word : wordsByNumOfLetters.get(1)) {
+        for (String word : wordsByNumOfLetters.get(maxLetters)) {
             solutions.add(new String[]{word});
         }
 
-        for (int wordIndex = 2; wordIndex <= maxLetters; wordIndex++) {
+        for (int wordIndex = maxLetters-1; wordIndex > 0; wordIndex--) {
             ArrayList<String[]> prevSolutions = solutions;
             solutions = new ArrayList<String[]>();
             for (String[] solution : prevSolutions) {
-                for (String word : wordsByNumOfLetters.get(wordIndex)) {
-                    if (hasAllCharactersInOrder(word, solution[wordIndex-2])) {
-                        // add new word to solution
-                        String[] newSolution = new String[wordIndex];
-                        System.arraycopy(solution, 0, newSolution, 0, wordIndex - 1);
-                        newSolution[wordIndex - 1] = word;
-                        solutions.add(newSolution);
+                findNextWord: {
+                    String currentWord = solution[maxLetters - wordIndex - 1];
+                    String[] shortVersions = new String[currentWord.length() - 1];
+                    for (int i = 0; i < shortVersions.length; i++) {
+                        shortVersions[i] = currentWord.substring(0, i) + currentWord.substring(i + 1);
+                    }
+
+                    for (String shortWord : wordsByNumOfLetters.get(wordIndex)) {
+                        for (String version : shortVersions) {
+                            if (version.contentEquals(shortWord)) {
+                                String[] newSolution = new String[maxLetters - wordIndex + 1];
+                                System.arraycopy(solution, 0, newSolution, 0, maxLetters - wordIndex);
+                                newSolution[maxLetters - wordIndex] = version;
+                                solutions.add(newSolution);
+                                break findNextWord;
+                            }
+                        }
                     }
                 }
             }
         }
 
         return solutions;
-    }
-
-    private boolean hasAllCharactersInOrder(String mainString, String subString) {
-        int mainIndex = 0; // Index for iterating through the main string
-        int subIndex = 0;  // Index for iterating through the sub string
-
-        // Iterate through both strings
-        while (mainIndex < mainString.length() && subIndex < subString.length()) {
-            // If characters match, move to the next character in both strings
-            if (mainString.charAt(mainIndex) == subString.charAt(subIndex)) {
-                subIndex++;
-            }
-            // Move to the next character in the main string
-            mainIndex++;
-        }
-
-        // If we reached the end of the sub string, it means all characters were found in order
-        return subIndex == subString.length();
     }
 }
