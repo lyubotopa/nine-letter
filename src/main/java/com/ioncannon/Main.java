@@ -1,5 +1,6 @@
 package com.ioncannon;
 
+import com.ioncannon.solvers.RecursionSolver;
 import com.ioncannon.solvers.TopDownSolver;
 import com.ioncannon.utils.FileReader;
 
@@ -14,8 +15,9 @@ public class Main {
                 "JavaCodingTestOne/master/scrabble-words.txt");
 
         long beforeSolving = System.currentTimeMillis();
-        TopDownSolver solver = new TopDownSolver();
-        //BuildUpSolver solver = new BuildUpSolver();
+        //TopDownSolver solver = new TopDownSolver();
+        //BuildUpSolver solver = BuildUpSolver();
+        RecursionSolver solver = new RecursionSolver();
         ArrayList<String[]> solutions = solver.solve(dictionary, new ArrayList<>(Arrays.asList("A", "I")), 9);
         long afterSolving = System.currentTimeMillis();
 
