@@ -1,4 +1,4 @@
-package com.ioncannon;
+package com.ioncannon.datatype;
 
 import java.util.ArrayList;
 import java.util.List;

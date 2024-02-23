@@ -8,7 +8,7 @@ import java.util.*;
 public class RecursionSolver {
 
     /**
-     * Solves the puzzle by starting from the max length and searching for smaller words
+     * Solves the puzzle by recursively searching for the next word
      * @param dictionary - a list of all valid words
      * @param maxLetters - the maximum length of the words (9 in the original puzzle)
      * @param singleLetterWords - if the single letter words are not included in the dictionary, specify them here

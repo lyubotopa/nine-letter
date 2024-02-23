@@ -1,6 +1,6 @@
 package com.ioncannon.solvers;
 
-import com.ioncannon.Trie;
+import com.ioncannon.datatype.Trie;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Map;
 public class TrieSolver {
 
     /**
-     * Solves the puzzle by starting from the max length and searching for smaller words
+     * Solves the using a custom prefix tree implementation
      * @param dictionary - a list of all valid words
      * @param maxLetters - the maximum length of the words (9 in the original puzzle)
      * @param singleLetterWords - if the single letter words are not included in the dictionary, specify them here
