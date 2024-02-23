@@ -1,4 +1,4 @@
-package com.ioncannon;
+package com.ioncannon.solvers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ public class BuildUpSolver {
 
     /**
      * Solves the puzzle by building up words from single letter to the maximum length
-     * Finds all solutions, but takes hours
+     * Finds all solutions, but is slowest of them all
      * @param dictionary - a list of all valid words
      * @param maxLetters - the maximum length of the words (9 in the original puzzle)
      * @param singleLetterWords - if the single letter words are not included in the dictionary, specify them here
@@ -60,20 +60,16 @@ public class BuildUpSolver {
     }
 
     private boolean hasAllCharactersInOrder(String mainString, String subString) {
-        int mainIndex = 0; // Index for iterating through the main string
-        int subIndex = 0;  // Index for iterating through the sub string
+        int mainIndex = 0;
+        int subIndex = 0;
 
-        // Iterate through both strings
         while (mainIndex < mainString.length() && subIndex < subString.length()) {
-            // If characters match, move to the next character in both strings
             if (mainString.charAt(mainIndex) == subString.charAt(subIndex)) {
                 subIndex++;
             }
-            // Move to the next character in the main string
             mainIndex++;
         }
 
-        // If we reached the end of the sub string, it means all characters were found in order
         return subIndex == subString.length();
     }
 }
