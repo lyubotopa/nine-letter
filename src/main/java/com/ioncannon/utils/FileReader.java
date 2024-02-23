@@ -1,4 +1,4 @@
-package com.ioncannon;
+package com.ioncannon.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

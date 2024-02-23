@@ -1,4 +1,4 @@
-package com.ioncannon;
+package com.ioncannon.solvers;
 
 import org.apache.commons.lang3.StringUtils;
 

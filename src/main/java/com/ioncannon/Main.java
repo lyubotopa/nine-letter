@@ -1,5 +1,8 @@
 package com.ioncannon;
 
+import com.ioncannon.solvers.TopDownSolver;
+import com.ioncannon.utils.FileReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
